@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>أفران ومخابز النصر | الحلويات الفاخرة</title>
+    <!-- Font Awesome للأيقونات -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- خطوط عربية جميلة -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&amp;family=Tajawal:wght@400;500;700&amp;display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Tajawal', 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #fdfbf7;
+            color: #3e2723;
+            overflow-x: hidden;
+        }
+
+        /* شريط الرأس الثابت */
+        .fixed-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            border-bottom: 2px solid #d7ccc8;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #8d6e63;
+            box-shadow: 0 4px 8px rgba(141, 110, 99, 0.2);
+            background: #fff;
+        }
+
+        .store-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #4e342e;
+            text-shadow: 2px 2px 0 #ffe0b2;
+            letter-spacing: -0.5px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .cart-icon, .menu-icon {
+            font-size: 28px;
+            color: #5d4037;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background: #fff;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .cart-icon:hover, .menu-icon:hover {
+            transform: scale(1.1);
+            color: #bf360c;
+        }
+
+        /* الستارة الجانبية (Sidebar) */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 280px;
+            height: 100vh;
+            background: #fff8f0;
+            box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+            z-index: 2000;
+            transition: right 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            padding: 20px 15px;
+            overflow-y: auto;
+            border-left: 3px solid #ffb74d;
+        }
+
+        .sidebar.active {
+            right: 0;
+        }
+
+        .sidebar .close-btn {
+            text-align: left;
+            font-size: 28px;
+            margin-bottom: 20px;
+            cursor: pointer;
+            color: #6d4c41;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 8px;
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+
+        .sidebar-menu li a {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 14px 16px;
+            color: #4e342e;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            background: #fff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+            transition: 0.2s;
+        }
+
+        .sidebar-menu li a i {
+            width: 24px;
+            color: #d84315;
+        }
+
+        .sidebar-menu li a:hover {
+            background: #ffccbc;
+            transform: translateX(-5px);
+            box-shadow: 0 6px 12px rgba(216, 67, 21, 0.1);
+        }
+
+        .sidebar-footer {
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px dashed #bcaaa4;
+        }
+
+        /* المحتوى الرئيسي */
+        .main-content {
+            margin-top: 90px;
+            padding: 20px 25px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* شريط البحث */
+        .search-section {
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 5px 5px 5px 20px;
+            border-radius: 50px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+            border: 1px solid #ffe0b2;
+            width: 70%;
+            max-width: 600px;
+        }
+
+        .search-box input {
+            flex: 1;
+            padding: 15px 10px;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            background: transparent;
+        }
+
+        .search-box button {
+            background: #bf360c;
+            border: none;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        /* قسم المنتجات الرائجة - Slider */
+        .section-title {
+            font-size: 2.2rem;
+            margin: 40px 0 20px;
+            position: relative;
+            display: inline-block;
+        }
+        .section-title:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 60%;
+            height: 4px;
+            background: #ff8a65;
+            border-radius: 4px;
+        }
+
+        .slider-container {
+            position: relative;
+            margin: 20px 0 10px;
+        }
+
+        .products-slider {
+            display: flex;
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            gap: 25px;
+            padding: 15px 5px 30px;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .products-slider::-webkit-scrollbar {
+            display: none;
+        }
+
+        .product-card {
+            min-width: 220px;
+            background: white;
+            border-radius: 30px;
+            padding: 20px 15px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            border: 1px solid #fbe9e7;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 35px rgba(191, 54, 12, 0.1);
+            border-color: #ffab91;
+        }
+
+        .product-card img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            border: 4px solid #ffe0b2;
+        }
+
+        .product-card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 10px;
+        }
+
+        .price {
+            color: #bf360c;
+            font-weight: bold;
+            font-size: 1.4rem;
+            margin: 10px 0;
+        }
+
+        .add-to-cart-btn {
+            background: #6d4c41;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.2s;
+            width: 100%;
+        }
+
+        .slider-controls {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-bottom: 10px;
+        }
+
+        .slider-btn {
+            background: #fff;
+            border: 1px solid #d7ccc8;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            font-size: 22px;
+            cursor: pointer;
+            color: #5d4037;
+            transition: 0.2s;
+        }
+
+        .view-all-btn {
+            display: inline-block;
+            margin: 20px 0 10px;
+            background: #ffb74d;
+            color: #3e2723;
+            padding: 12px 30px;
+            border-radius: 40px;
+            font-weight: bold;
+            text-decoration: none;
+            box-shadow: 0 5px 0 #e65100;
+            transition: 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+
+        /* الأقسام */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .category-card {
+            background: #fff3e0;
+            border-radius: 30px;
+            padding: 20px 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            border-color: #ff8a65;
+            background: #ffe0b2;
+            transform: scale(1.03);
+        }
+
+        .category-card img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            border-radius: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* السطر المتحرك */
+        .marquee {
+            background: #5d4037;
+            color: #ffecb3;
+            padding: 12px 0;
+            font-size: 1.5rem;
+            font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            margin: 40px 0 20px;
+            border-radius: 50px;
+        }
+
+        .marquee span {
+            display: inline-block;
+            animation: marquee 15s linear infinite;
+            padding-left: 100%;
+        }
+
+        @keyframes marquee {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(-100%, 0); }
+        }
+
+        /* الفوتر */
+        .footer {
+            margin-top: 60px;
+            padding: 30px 0 20px;
+            border-top: 1px solid #efebe9;
+            text-align: center;
+        }
+
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 25px;
+        }
+
+        .social-icons a {
+            color: #4e342e;
+            font-size: 32px;
+            transition: 0.2s;
+        }
+
+        .developer-credit {
+            color: #bcaaa4;
+            font-size: 1rem;
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+
+        /* نافذة السلة المنبثقة */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.4);
+            z-index: 3000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 40px;
+            max-width: 450px;
+            width: 90%;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .store-name { font-size: 1.4rem; }
+            .logo-img { width: 40px; height: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- الهيدر الثابت مع الاسم والصورة الدائرية -->
+<header class="fixed-header">
+    <div class="logo-area">
+        <img src="https://placehold.co/100x100/8d6e63/fff?text=🥐" alt="شعار المخبز" class="logo-img">
+        <span class="store-name">أفران ومخابز النصر</span>
+    </div>
+    <div class="header-icons">
+        <i class="fas fa-shopping-cart cart-icon" onclick="openCartModal()"></i>
+        <i class="fas fa-bars menu-icon" onclick="toggleSidebar()"></i>
+    </div>
+</header>
+
+<!-- الستارة الجانبية -->
+<div class="sidebar" id="sidebar">
+    <div class="close-btn" onclick="toggleSidebar()">&times;</div>
+    <ul class="sidebar-menu">
+        <li><a href="#"><i class="fas fa-home"></i> الصفحة الرئيسية</a></li>
+        <li><a href="#"><i class="fas fa-birthday-cake"></i> أقسام الكيك</a></li>
+        <li><a href="#"><i class="fas fa-cookie-bite"></i> الحلويات الشرقية</a></li>
+        <li><a href="#"><i class="fas fa-bread-slice"></i> المخبوزات</a></li>
+        <li><a href="#"><i class="fas fa-question-circle"></i> من نحن</a></li>
+        <li><a href="#"><i class="fas fa-undo-alt"></i> سياسة الاسترجاع</a></li>
+        <li><a href="#"><i class="fas fa-lock"></i> سياسة الخصوصية</a></li>
+        <li><a href="#"><i class="fas fa-headset"></i> الدعم الفني</a></li>
+    </ul>
+    <div class="sidebar-footer">
+        <a href="#" style="display: block; background: #bf360c; color: white; text-align: center; padding: 14px; border-radius: 30px; text-decoration: none; font-weight: bold; margin-bottom: 15px;">
+            <i class="fas fa-sign-in-alt"></i> تسجيل دخول العميل
+        </a>
+    </div>
+</div>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+    <!-- شريط البحث -->
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" placeholder="ابحث عن كيكة العسل، بقلاوة، كرواسون...">
+            <button><i class="fas fa-search"></i> بحث</button>
+        </div>
+    </div>
+
+    <!-- المنتجات الرائجة مع slider -->
+    <h2 class="section-title">🍰 الأكثر مبيعاً</h2>
+    <div class="slider-controls">
+        <button class="slider-btn" onclick="slideLeft()"><i class="fas fa-chevron-right"></i></button>
+        <button class="slider-btn" onclick="slideRight()"><i class="fas fa-chevron-left"></i></button>
+    </div>
+    <div class="slider-container">
+        <div class="products-slider" id="productSlider">
+            <!-- المنتجات سيتم حقنها بالجافاسكربت -->
+        </div>
+    </div>
+    <div style="text-align: left;">
+        <button class="view-all-btn" onclick="alert('سيتم عرض جميع المنتجات هنا (صفحة منفصلة)')">عرض جميع المنتجات <i class="fas fa-arrow-left"></i></button>
+    </div>
+
+    <!-- الأقسام -->
+    <h2 class="section-title">📂 أقسام المتجر</h2>
+    <div class="categories-grid" id="categoriesContainer">
+        <!-- سيتم توليدها -->
+    </div>
+
+    <!-- سطر متحرك -->
+    <div class="marquee">
+        <span>شكراً لزيارة متجر أفران ومخابز النصر - نتمنى لكم تجربة شهية 🧁✨</span>
+    </div>
+</div>
+
+<!-- الفوتر -->
+<footer class="footer">
+    <div class="social-icons">
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-facebook-f"></i></a>
+        <a href="#"><i class="fab fa-whatsapp"></i></a>
+        <a href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+    <div class="developer-credit">
+        <i class="far fa-copyright"></i> تم التطوير بواسطة <strong>مازن علي بن علي</strong>
+    </div>
+</footer>
+
+<!-- مودال السلة والدفع -->
+<div class="modal" id="cartModal">
+    <div class="modal-content">
+        <h2 style="margin-bottom: 20px;"><i class="fas fa-shopping-basket"></i> سلة المشتريات</h2>
+        <div id="cartItemsList" style="max-height: 200px; overflow-y: auto; margin-bottom: 20px;">
+            <p>كيكة الشوكولاتة × 1</p>
+        </div>
+        <hr>
+        <p style="font-weight: bold; font-size: 1.4rem;">الإجمالي: ٨٥ ر.س</p>
+        <button onclick="proceedToPayment()" style="background: #2e7d32; color: white; border: none; padding: 15px; width: 100%; border-radius: 40px; font-size: 1.2rem; margin: 15px 0;">موافق على الشراء <i class="fas fa-check"></i></button>
+        <div id="paymentMethods" style="display: none; margin-top: 20px;">
+            <h3>اختر طريقة الدفع:</h3>
+            <div style="display: flex; gap: 15px; justify-content: center; margin: 20px 0;">
+                <i class="fab fa-cc-visa fa-3x"></i>
+                <i class="fab fa-cc-mastercard fa-3x"></i>
+                <i class="fab fa-cc-paypal fa-3x"></i>
+            </div>
+        </div>
+        <button onclick="closeCartModal()" style="background: #bdbdbd; border: none; padding: 10px; width: 100%; border-radius: 30px;">إغلاق</button>
+    </div>
+</div>
+
+<script>
+    // بيانات وهمية للمنتجات (يمكن لصاحب المحل تعديلها)
+    const products = [
+        { name: 'كيكة العسل', price: '٩٥ ر.س', img: 'https://placehold.co/200x200/f9a825/fff?text=🍯' },
+        { name: 'تشيز كيك', price: '١١٠ ر.س', img: 'https://placehold.co/200x200/ffccbc/fff?text=🧀' },
+        { name: 'كرواسون زبدة', price: '١٥ ر.س', img: 'https://placehold.co/200x200/ffb74d/fff?text=🥐' },
+        { name: 'بقلاوة فستق', price: '٧٥ ر.س', img: 'https://placehold.co/200x200/8d6e63/fff?text=🥮' },
+        { name: 'كب كيك', price: '١٢ ر.س', img: 'https://placehold.co/200x200/e57373/fff?text=🧁' },
+        { name: 'كيكة الفراولة', price: '١٢٠ ر.س', img: 'https://placehold.co/200x200/f06292/fff?text=🍓' }
+    ];
+
+    const categories = [
+        { name: 'كيك', img: 'https://placehold.co/150x150/f48fb1/fff?text=🎂' },
+        { name: 'معجنات', img: 'https://placehold.co/150x150/ffe082/fff?text=🥨' },
+        { name: 'حلويات شرقية', img: 'https://placehold.co/150x150/bcaaa4/fff?text=🍬' },
+        { name: 'خبز', img: 'https://placehold.co/150x150/a1887f/fff?text=🍞' }
+    ];
+
+    // حقن المنتجات في السلايدر
+    const slider = document.getElementById('productSlider');
+    products.forEach(p => {
+        slider.innerHTML += `
+            <div class="product-card">
+                <img src="${p.img}" alt="${p.name}">
+                <h3>${p.name}</h3>
+                <div class="price">${p.price}</div>
+                <button class="add-to-cart-btn" onclick="addToCart('${p.name}')">أضف للسلة <i class="fas fa-cart-plus"></i></button>
+            </div>
+        `;
+    });
+
+    // حقن الأقسام
+    const catContainer = document.getElementById('categoriesContainer');
+    categories.forEach(c => {
+        catContainer.innerHTML += `
+            <div class="category-card" onclick="alert('قسم: ${c.name}')">
+                <img src="${c.img}" alt="${c.name}">
+                <h3>${c.name}</h3>
+            </div>
+        `;
+    });
+
+    // وظائف السلايدر
+    function slideLeft() {
+        document.getElementById('productSlider').scrollBy({ left: -250, behavior: 'smooth' });
+    }
+    function slideRight() {
+        document.getElementById('productSlider').scrollBy({ left: 250, behavior: 'smooth' });
+    }
+
+    // الستارة
+    function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('active');
+    }
+
+    // السلة
+    function openCartModal() {
+        document.getElementById('cartModal').style.display = 'flex';
+    }
+    function closeCartModal() {
+        document.getElementById('cartModal').style.display = 'none';
+        document.getElementById('paymentMethods').style.display = 'none';
+    }
+    function addToCart(name) {
+        alert('تمت إضافة ' + name + ' إلى السلة ✅');
+    }
+    function proceedToPayment() {
+        document.getElementById('paymentMethods').style.display = 'block';
+    }
+
+    // لإغلاق الستارة عند الضغط خارجها (اختياري)
+    window.onclick = function(event) {
+        const modal = document.getElementById('cartModal');
+        const sidebar = document.getElementById('sidebar');
+        if (event.target === modal) modal.style.display = 'none';
+        if (!event.target.closest('.sidebar') && !event.target.closest('.menu-icon') && sidebar.classList.contains('active')) {
+            sidebar.classList.remove('active');
+        }
+    }
+</script>
+</body>
+</html>
