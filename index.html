@@ -4,51 +4,41 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="theme-color" content="#bf360c">
-    <meta name="description" content="أفران ومخابز النصر - المتجر الرسمي لبيع الكيك والمعجنات والحلويات الشرقية">
-    <meta name="keywords" content="مخابز, كيك, معجنات, حلويات, النصر, فيديوهات, يوتيوب">
+    <meta name="description" content="أفران ومخابز النصر - المتجر الرسمي">
     <title>أفران ومخابز النصر | المتجر الرسمي</title>
     
-    <!-- Firebase SDKs -->
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
     
-    <!-- Leaflet للخرائط -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
     
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- ========== HEADER ========== -->
     <header class="fixed-header">
         <div class="logo-area" onclick="navigateTo('home')">
-            <img src="https://placehold.co/100x100/8d6e63/fff?text=🥐" alt="شعار المتجر" class="logo-img" id="storeLogo">
+            <img src="https://placehold.co/100x100/8d6e63/fff?text=🥐" alt="شعار" class="logo-img" id="storeLogo">
             <span class="store-name" id="storeNameDisplay">أفران ومخابز النصر</span>
         </div>
         <div class="header-icons">
-            <i class="fas fa-video icon-btn" onclick="navigateTo('videos')" aria-label="الفيديوهات" style="font-size: 1rem;"></i>
-            <i class="fas fa-heart icon-btn" onclick="openWishlistModal()" aria-label="المفضلة"></i>
-            <i class="fas fa-shopping-cart icon-btn cart-icon" onclick="openCartModal()" aria-label="سلة المشتريات">
+            <i class="fas fa-video icon-btn" onclick="navigateTo('videos')"></i>
+            <i class="fas fa-heart icon-btn" onclick="openWishlistModal()"></i>
+            <i class="fas fa-shopping-cart icon-btn cart-icon" onclick="openCartModal()">
                 <span class="cart-count" id="cartCount">0</span>
             </i>
-            <i class="fas fa-bars icon-btn menu-icon" onclick="toggleSidebar()" aria-label="القائمة"></i>
+            <i class="fas fa-bars icon-btn menu-icon" onclick="toggleSidebar()"></i>
         </div>
     </header>
 
-    <!-- ========== SIDEBAR OVERLAY ========== -->
     <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
-    <!-- ========== SIDEBAR ========== -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
             <h3>القائمة</h3>
@@ -75,48 +65,22 @@
                     <div style="font-size: 0.75rem; color: var(--gray);">غير مسجل</div>
                 </div>
             </div>
-            <button class="btn btn-primary btn-block btn-sm" onclick="openLoginModal()" id="sidebarLoginBtn">
-                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-            </button>
-            <button class="btn btn-secondary btn-block btn-sm" onclick="logout()" id="sidebarLogoutBtn" style="display: none;">
-                <i class="fas fa-sign-out-alt"></i> تسجيل الخروج
-            </button>
+            <button class="btn btn-primary btn-block btn-sm" onclick="openLoginModal()" id="sidebarLoginBtn"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</button>
+            <button class="btn btn-secondary btn-block btn-sm" onclick="logout()" id="sidebarLogoutBtn" style="display: none;"><i class="fas fa-sign-out-alt"></i> تسجيل الخروج</button>
         </div>
     </aside>
 
-    <!-- ========== MAIN CONTENT ========== -->
     <main id="app">
-        <!-- ========== MAIN CONTENT ========== -->
-<main id="app">
-    
-    <!-- ⬇️ أضف الفيديو هنا ⬇️ -->
-    <div style="max-width: 800px; margin: 20px auto; padding: 0 15px;">
-        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.15);">
-            <iframe 
-                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 20px;"
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-                title="https://youtube.com/shorts/2th0c0utuco?si=lEs_i_opYtKXoLAZ" 
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                allowfullscreen>
-            </iframe>
-        </div>
-        <h3 style="text-align: center; margin-top: 12px; color: #3e2723;">🎥 شاهد طريقة تحضير منتجاتنا</h3>
-    </div>
-    <!-- ⬆️ نهاية الفيديو ⬆️ -->
-    
-    <div class="spinner"></div>
-</main>
         <div class="spinner"></div>
     </main>
 
-    <!-- ========== FOOTER ========== -->
     <footer class="footer">
         <div class="social-icons">
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-            <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
-            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-            <a href="#" aria-label="YouTube" onclick="navigateTo('videos')"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-whatsapp"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#" onclick="navigateTo('videos')"><i class="fab fa-youtube"></i></a>
         </div>
         <div class="footer-links">
             <a href="#" onclick="navigateTo('about')">من نحن</a>
@@ -128,12 +92,21 @@
         <div class="developer-credit">تم التطوير بواسطة <strong>مازن علي بن علي</strong> &copy; 2024</div>
     </footer>
 
-    <!-- ========== ADMIN TOGGLE ========== -->
-    <div class="admin-toggle" id="adminToggleBtn" onclick="toggleAdminPanel()" style="display: none;">
-        <i class="fas fa-tools"></i>
+    <!-- ========== شريط الفيديو الإعلاني (أسفل الصفحة - 10 ثوان) ========== -->
+    <div class="video-banner" id="videoBanner">
+        <div class="banner-header">
+            <span class="banner-title"><i class="fas fa-play-circle"></i> إعلان - أفران ومخابز النصر</span>
+            <span class="banner-timer" id="bannerTimer">10</span>
+            <div class="banner-close-btn" onclick="closeVideoBanner()">✕</div>
+        </div>
+        <div class="banner-video-wrapper">
+            <iframe id="bannerVideoFrame" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            <button class="banner-skip-btn" onclick="closeVideoBanner()">تخطي الإعلان ←</button>
+        </div>
     </div>
 
-    <!-- ========== ADMIN PANEL ========== -->
+    <div class="admin-toggle" id="adminToggleBtn" onclick="toggleAdminPanel()" style="display: none;"><i class="fas fa-tools"></i></div>
+
     <div class="admin-panel" id="adminPanel">
         <div class="tabs" id="adminTabs">
             <div class="tab active" onclick="switchAdminTab('products')">المنتجات</div>
@@ -147,155 +120,75 @@
         <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="toggleAdminPanel()">إغلاق</button>
     </div>
 
-    <!-- ========== MODALS ========== -->
-    
     <!-- Login Modal -->
     <div class="modal" id="loginModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>🔐 تسجيل الدخول</h2>
-                <button class="modal-close" onclick="closeModal('loginModal')">&times;</button>
-            </div>
-            <div class="form-group">
-                <label for="passwordInput">كلمة المرور</label>
-                <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور" class="form-input">
-            </div>
+            <div class="modal-header"><h2>🔐 تسجيل الدخول</h2><button class="modal-close" onclick="closeModal('loginModal')">&times;</button></div>
+            <div class="form-group"><label>كلمة المرور</label><input type="password" id="passwordInput" placeholder="أدخل كلمة المرور" class="form-input"></div>
             <button class="btn btn-primary btn-block" onclick="login()">دخول</button>
-            <p class="login-hint">المدير: <strong>1234</strong> | المطور: <strong>mazen</strong></p>
+            <p style="margin-top: 12px; font-size: 0.85rem; color: var(--gray); text-align: center;">المدير: <strong>1234</strong> | المطور: <strong>mazen</strong></p>
         </div>
     </div>
 
-    <!-- Cart Modal -->
     <div class="modal" id="cartModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>🛒 سلة المشتريات</h2>
-                <button class="modal-close" onclick="closeModal('cartModal')">&times;</button>
-            </div>
+            <div class="modal-header"><h2>🛒 سلة المشتريات</h2><button class="modal-close" onclick="closeModal('cartModal')">&times;</button></div>
             <div id="cartItemsList"></div>
             <div class="cart-total" id="cartTotal"></div>
             <div id="checkoutForm" style="display: none;">
                 <h3 style="margin-bottom: 12px;">📝 معلومات التوصيل</h3>
-                <div class="form-group">
-                    <label for="customerName">الاسم الكامل *</label>
-                    <input type="text" id="customerName" class="form-input" placeholder="أدخل اسمك">
-                </div>
-                <div class="form-group">
-                    <label for="customerPhone">رقم الهاتف *</label>
-                    <input type="tel" id="customerPhone" class="form-input" placeholder="05xxxxxxxx">
-                </div>
-                <div class="form-group">
-                    <label for="customerAddress">العنوان *</label>
-                    <input type="text" id="customerAddress" class="form-input" placeholder="الحي، الشارع، رقم المبنى">
-                </div>
-                <div class="form-group">
-                    <label for="orderNotes">ملاحظات إضافية</label>
-                    <textarea id="orderNotes" class="form-textarea" placeholder="أي ملاحظات للطلب..." rows="2"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="paymentMethod">طريقة الدفع</label>
-                    <select id="paymentMethod" class="form-select">
-                        <option value="cash">نقداً عند الاستلام</option>
-                        <option value="card">بطاقة ائتمان</option>
-                        <option value="wallet">محفظة إلكترونية</option>
-                    </select>
-                </div>
+                <div class="form-group"><label>الاسم الكامل *</label><input type="text" id="customerName" class="form-input" placeholder="أدخل اسمك"></div>
+                <div class="form-group"><label>رقم الهاتف *</label><input type="tel" id="customerPhone" class="form-input" placeholder="05xxxxxxxx"></div>
+                <div class="form-group"><label>العنوان *</label><input type="text" id="customerAddress" class="form-input" placeholder="الحي، الشارع، رقم المبنى"></div>
+                <div class="form-group"><label>ملاحظات إضافية</label><textarea id="orderNotes" class="form-textarea" placeholder="أي ملاحظات للطلب..." rows="2"></textarea></div>
+                <div class="form-group"><label>طريقة الدفع</label><select id="paymentMethod" class="form-select"><option value="cash">نقداً عند الاستلام</option><option value="card">بطاقة ائتمان</option><option value="wallet">محفظة إلكترونية</option></select></div>
             </div>
-            <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled>
-                <i class="fas fa-shopping-bag"></i> متابعة الشراء
-            </button>
+            <button class="checkout-btn" id="checkoutBtn" onclick="proceedToCheckout()" disabled><i class="fas fa-shopping-bag"></i> متابعة الشراء</button>
             <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="closeModal('cartModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- Wishlist Modal -->
     <div class="modal" id="wishlistModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>❤️ المفضلة</h2>
-                <button class="modal-close" onclick="closeModal('wishlistModal')">&times;</button>
-            </div>
+            <div class="modal-header"><h2>❤️ المفضلة</h2><button class="modal-close" onclick="closeModal('wishlistModal')">&times;</button></div>
             <div id="wishlistItems"></div>
             <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="closeModal('wishlistModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- Support Modal -->
     <div class="modal" id="supportModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2>📞 الدعم الفني والشكاوى</h2>
-                <button class="modal-close" onclick="closeModal('supportModal')">&times;</button>
-            </div>
-            <div class="form-group">
-                <label for="complaintName">الاسم</label>
-                <input type="text" id="complaintName" class="form-input" placeholder="اسمك الكامل">
-            </div>
-            <div class="form-group">
-                <label for="complaintPhone">رقم الهاتف</label>
-                <input type="tel" id="complaintPhone" class="form-input" placeholder="05xxxxxxxx">
-            </div>
-            <div class="form-group">
-                <label for="complaintText">الشكوى أو الاقتراح</label>
-                <textarea id="complaintText" class="form-textarea" placeholder="اكتب مشكلتك أو اقتراحك..." rows="4"></textarea>
-            </div>
-            <button class="btn btn-primary btn-block" onclick="submitComplaint()">
-                <i class="fas fa-paper-plane"></i> إرسال
-            </button>
+            <div class="modal-header"><h2>📞 الدعم الفني والشكاوى</h2><button class="modal-close" onclick="closeModal('supportModal')">&times;</button></div>
+            <div class="form-group"><label>الاسم</label><input type="text" id="complaintName" class="form-input" placeholder="اسمك الكامل"></div>
+            <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="complaintPhone" class="form-input" placeholder="05xxxxxxxx"></div>
+            <div class="form-group"><label>الشكوى أو الاقتراح</label><textarea id="complaintText" class="form-textarea" placeholder="اكتب مشكلتك أو اقتراحك..." rows="4"></textarea></div>
+            <button class="btn btn-primary btn-block" onclick="submitComplaint()"><i class="fas fa-paper-plane"></i> إرسال</button>
             <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="closeModal('supportModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- Branches Modal -->
     <div class="modal" id="branchesModal">
         <div class="modal-content" style="max-width: 700px;">
-            <div class="modal-header">
-                <h2>📍 فروع أفران ومخابز النصر</h2>
-                <button class="modal-close" onclick="closeModal('branchesModal')">&times;</button>
-            </div>
+            <div class="modal-header"><h2>📍 فروع أفران ومخابز النصر</h2><button class="modal-close" onclick="closeModal('branchesModal')">&times;</button></div>
             <div id="branchesMap" style="height: 320px;"></div>
             <div id="branchesList" style="margin-top: 16px;"></div>
             <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="closeModal('branchesModal')">إغلاق</button>
         </div>
     </div>
 
-    <!-- Branch Form Modal -->
     <div class="modal" id="branchFormModal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h3>➕ إضافة فرع جديد</h3>
-                <button class="modal-close" onclick="closeModal('branchFormModal')">&times;</button>
-            </div>
+            <div class="modal-header"><h3>➕ إضافة فرع جديد</h3><button class="modal-close" onclick="closeModal('branchFormModal')">&times;</button></div>
             <p style="margin-bottom: 10px; font-size: 0.85rem;">اسحب العلامة لتحديد موقع الفرع:</p>
             <div id="branchFormMap" style="height: 250px;"></div>
-            <div class="form-group" style="margin-top: 12px;">
-                <label for="branchNameInput">اسم الفرع</label>
-                <input type="text" id="branchNameInput" class="form-input" placeholder="مثال: فرع الدمام">
-            </div>
-            <div class="form-group">
-                <label for="branchAddressInput">العنوان</label>
-                <input type="text" id="branchAddressInput" class="form-input" placeholder="الشارع، المدينة">
-            </div>
-            <div class="form-group">
-                <label for="branchPhoneInput">رقم الهاتف</label>
-                <input type="tel" id="branchPhoneInput" class="form-input" placeholder="05xxxxxxxx">
-            </div>
+            <div class="form-group" style="margin-top: 12px;"><label>اسم الفرع</label><input type="text" id="branchNameInput" class="form-input" placeholder="مثال: فرع الدمام"></div>
+            <div class="form-group"><label>العنوان</label><input type="text" id="branchAddressInput" class="form-input" placeholder="الشارع، المدينة"></div>
+            <div class="form-group"><label>رقم الهاتف</label><input type="tel" id="branchPhoneInput" class="form-input" placeholder="05xxxxxxxx"></div>
             <button class="btn btn-primary btn-block" onclick="saveNewBranch()">حفظ الفرع</button>
             <button class="btn btn-secondary btn-block btn-sm mt-2" onclick="closeModal('branchFormModal')">إلغاء</button>
         </div>
     </div>
 
-    <!-- Video Player Modal -->
-    <div class="modal video-preview-modal" id="videoPlayerModal">
-        <div class="modal-content" style="max-width: 800px; padding: 0; overflow: hidden;">
-            <button class="modal-close" style="position: absolute; top: 10px; left: 10px; z-index: 10; background: rgba(0,0,0,0.7); color: white;" 
-                    onclick="closeModal('videoPlayerModal')">&times;</button>
-            <div class="video-preview-container" id="videoPlayerContainer"></div>
-            <div class="video-preview-info" id="videoPlayerInfo"></div>
-        </div>
-    </div>
-
-    <!-- ========== SCRIPTS ========== -->
     <script src="config.js"></script>
     <script src="data.js"></script>
     <script src="ui.js"></script>
